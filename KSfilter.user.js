@@ -13,19 +13,19 @@
 // ==/UserScript==
 
 (function() {
-   $('<input type="text" id="filterTxt"/>').appendTo("div.back-to-top");
-    var $filterBtn = $('<button id="filterBtn" type="button">Filter</button>');
+    $('<input type="text" id="filterTxt" placeholder="Blocked String"/>').appendTo("div.back-to-top");
+    var $filterBtn = $('<button id="filterBtn" class="btn btn--border-gray btn--small" type="button">Filter</button>');
     $filterBtn.appendTo("div.back-to-top");
-     var $clearBtn = $('<button id="clearBtn" type="button">Clear</button>');
-     $clearBtn.appendTo("div.back-to-top");
+    var $clearBtn = $('<button id="clearBtn" class="btn btn--border-gray btn--small" type="button">Clear</button>');
+    $clearBtn.appendTo("div.back-to-top");
     $filterBtn.on("click",function(event){
         event.preventDefault();
         var keyword = $("#filterTxt").val();
-       $(".project-blurb:contains("+keyword+")").closest("li.project").hide("slow");        
+        $(".project-blurb:contains("+keyword+")").closest("li.project").hide("slow");        
     });
     $clearBtn.on("click",function(event){
         event.preventDefault();
-       $("li.project").show();
+        $("li.project").show();
     });
-    
+
 })();
