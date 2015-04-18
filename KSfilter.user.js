@@ -44,4 +44,19 @@ jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
         if ( event.which == 13 ) doFilter();
     });
 
+
+
+    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+    var target = document.querySelector('#projects_list');
+
+    var observer = new MutationObserver(function(mutations) {
+        /*mutations.forEach(function(mutation) {
+            console.log(mutation.type);
+        });*/
+        doFilter();
+    });
+
+    observer.observe(target, { childList: true});
+
 })();
