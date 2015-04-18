@@ -12,6 +12,12 @@
 // @require     http://code.jquery.com/jquery-2.1.3.min.js
 // ==/UserScript==
 
+jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    };
+});
+
 (function() {
     $('<input type="text" id="filterTxt" placeholder="Blocked String"/>').appendTo("div.back-to-top");
     var $filterBtn = $('<button id="filterBtn" class="btn btn--border-gray btn--small" type="button">Filter</button>');
@@ -21,7 +27,7 @@
     $filterBtn.on("click",function(event){
         event.preventDefault();
         var keyword = $("#filterTxt").val();
-        $(".project-blurb:contains("+keyword+")").closest("li.project").hide("slow");        
+        $(".project-blurb:icontains("+keyword+")").closest("li.project").hide("slow");        
     });
     $clearBtn.on("click",function(event){
         event.preventDefault();
