@@ -12,6 +12,7 @@
 // @require     http://code.jquery.com/jquery-2.1.3.min.js
 // ==/UserScript==
 
+
 jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
     return function( elem ) {
         return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
@@ -19,11 +20,16 @@ jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
 });
 
 (function() {
-    $('<input type="text" id="filterTxt" placeholder="Blocked String"/>').appendTo("div.back-to-top");
-    var $filterBtn = $('<button id="filterBtn" class="btn btn--border-gray btn--small" type="button">Filter</button>');
-    $filterBtn.appendTo("div.back-to-top");
-    var $clearBtn = $('<button id="clearBtn" class="btn btn--border-gray btn--small" type="button">Clear</button>');
-    $clearBtn.appendTo("div.back-to-top");
+    var $filterDiv =  $('<div id="filterDiv">').css({
+        "position": "fixed",
+        "right": 0,
+        "bottom": 0
+    });
+    $('<input type="text" id="filterTxt" placeholder="Blocked String"/>').appendTo($filterDiv);
+    var $filterBtn = $('<button id="filterBtn" class="btn btn--border-gray btn--small" type="button">Filter</button>').appendTo($filterDiv);
+    var $clearBtn = $('<button id="clearBtn" class="btn btn--border-gray btn--small" type="button">Clear</button>').appendTo($filterDiv);
+    
+    $filterDiv.appendTo("body");
     $filterBtn.on("click",function(event){
         event.preventDefault();
         var keyword = $("#filterTxt").val();
