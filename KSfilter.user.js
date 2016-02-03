@@ -9,7 +9,7 @@
 // @include      https://www.kickstarter.com/discover*
 // @run-at       document-end
 // @grant        none
-// @require     http://code.jquery.com/jquery-2.1.3.min.js
+// @require     http://code.jquery.com/jquery-2.2.0.min.js
 // ==/UserScript==
 
 jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
@@ -19,15 +19,17 @@ jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
 });
 
 (function() {
-    var $filterDiv =  $('<div id="filterDiv">').css({
+    var jq = jQuery.noConflict();
+
+    var $filterDiv =  jq('<div id="filterDiv">').css({
         "position": "fixed",
         "right": 0,
         "bottom": 0
     }).appendTo("body");
-    var $filterTxt = $('<input type="text" id="filterTxt" placeholder="Filter String"/>').appendTo($filterDiv);
+    var $filterTxt = jq('<input type="text" id="filterTxt" placeholder="Filter String"/>').appendTo($filterDiv);
 
     var doFilter =  function(){
-        $("li.project").show();
+        jq("li.project").show();
         var keyword = jQuery.trim($("#filterTxt").val());
         console.log("keyword",keyword);
         if( keyword === "" ) {
@@ -36,7 +38,7 @@ jQuery.expr[":"].icontains = jQuery.expr.createPseudo(function(arg) {
         }
         else {
             $filterTxt.css("border-color", "#2bde73");
-            $(".project-blurb:icontains("+keyword+")").closest("li.project").hide("slow");
+            jq(".project-card-content:icontains("+keyword+")").closest("li.project").hide("slow");
         }
     };
 
